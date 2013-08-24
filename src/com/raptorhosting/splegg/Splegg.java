@@ -50,7 +50,7 @@ public class Splegg extends JavaPlugin {
 	public String newVer = "";
 	public File updateFile = this.getFile();
 	
-	public List<String> special = Arrays.asList(new String[] { "njb_said", "That1Guy2", "Shabuwa", "ChippNDipp", "TheSenorChang", "Dwizofoz" , "irRedemption"});
+	public List<String> special = Arrays.asList(new String[] { "njb_said", "That1Guy2", "ChippNDipp", "TheSenorChang", "Dwizofoz" , "irRedemption"});
 	public boolean eco = false;
 	public boolean disabling = false;
 	

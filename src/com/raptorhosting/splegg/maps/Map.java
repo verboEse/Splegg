@@ -139,7 +139,6 @@ public class Map {
 	}
 	
 	public void loadSpawns() {
-		
 		for (int a = 1; a <= getCount(); a++) {
 			this.spawncount = a;
 		}
