@@ -111,12 +111,10 @@ public class Map {
 		getConfig().set("Spawns." + id + ".z", z);
 		getConfig().set("Spawns." + id + ".pitch", pitch);
 		getConfig().set("Spawns." + id + ".yaw", yaw);
-		
 		save();
 	}
 	
 	public Location getSpawn(int id) {
-		
 		int x,y,z;
 		float yaw,pitch;
 		World world;
@@ -131,7 +129,6 @@ public class Map {
 		world = Bukkit.getWorld(getConfig().getString("Spawns." + id + ".world"));
 		
 		return new Location(world, x + 0.5D, y + 0.5D, z + 0.5D, yaw, pitch);
-		
 	}
 	
 	public String getName() {
@@ -206,6 +203,47 @@ public class Map {
 	
 	public void setConfig(FileConfiguration config) {
 		this.config = config;
+	}
+	
+	public boolean lobbySet() {
+		return getConfig().isString("Spawns.lobby.world");
+	}
+	
+	public void setLobby(Location l) {
+		
+		int x = l.getBlockX();
+		int y = l.getBlockY();
+		int z = l.getBlockZ();
+		
+		float pitch = l.getPitch();
+		float yaw = l.getYaw();
+		
+		String worldname = l.getWorld().getName();
+
+		getConfig().set("Spawns.lobby.world", worldname);
+		getConfig().set("Spawns.lobby.x", x);
+		getConfig().set("Spawns.lobby.y", y);
+		getConfig().set("Spawns.lobby.z", z);
+		getConfig().set("Spawns.lobby.pitch", pitch);
+		getConfig().set("Spawns.lobby.yaw", yaw);
+		save();
+	}
+	
+	public Location getLobby() {
+		int x,y,z;
+		float yaw,pitch;
+		World world;
+		
+		x = getConfig().getInt("Spawns.lobby.x");
+		y = getConfig().getInt("Spawns.lobby.y");
+		z = getConfig().getInt("Spawns.lobby.z");
+
+		yaw = getConfig().getInt("Spawns.lobby.yaw");
+		pitch = getConfig().getInt("Spawns.lobby.pitch");
+		
+		world = Bukkit.getWorld(getConfig().getString("Spawns.lobby.world"));
+		
+		return new Location(world, x + 0.5D, y + 0.5D, z + 0.5D, yaw, pitch);
 	}
 	
 }

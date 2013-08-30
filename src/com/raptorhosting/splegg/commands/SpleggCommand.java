@@ -28,7 +28,7 @@ public class SpleggCommand implements CommandExecutor {
 			Permissions perms = new Permissions(player);
 			
 			if (args.length == 0) {
-				Splegg.getSplegg().chat.sendMessage(player, "&b--- &dSplegg v1.3 &b---");
+				Splegg.getSplegg().chat.sendMessage(player, "&b--- &dSplegg v1.4 &b---");
 				Splegg.getSplegg().chat.sendMessage(player, "&c/" + tag + " help <player|mod|admin>");
 			} else if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("join")) {
@@ -109,7 +109,7 @@ public class SpleggCommand implements CommandExecutor {
 					}
 				} else if (args[0].equalsIgnoreCase("help")) {
 //					Splegg.getSplegg().chat.sendMessage(player, "&b--- &4&lSplegg Help &b---");
-					Splegg.getSplegg().chat.sendMessage(player, "&b--- &dSplegg v1.3 &b---");
+					Splegg.getSplegg().chat.sendMessage(player, "&b--- &dSplegg v1.4 &b---");
 					Splegg.getSplegg().chat.sendMessage(player, "&c/" + tag + " help <player|mod|admin>");
 				} else {
 					Splegg.getSplegg().chat.sendMessage(player, "&cIncorrect Usage: &6/" + tag + " <join,leave,stop,start,setlobby,help>");
@@ -185,6 +185,18 @@ public class SpleggCommand implements CommandExecutor {
 					} else {
 						Splegg.getSplegg().chat.sendMessage(player, "&cYou do not have permission.");
 					}
+				} else if (args[0].equalsIgnoreCase("setlobby")) {
+					if (perms.canStartEnd()) {
+						String name = args[1];
+						if (Splegg.getSplegg().maps.mapExists(name)) {
+							Splegg.getSplegg().maps.getMap(name).setLobby(player.getLocation());
+							Splegg.getSplegg().chat.sendMessage(player, "Lobby for map &e" + name + "&6 set.");
+						} else {
+							Splegg.getSplegg().chat.sendMessage(player, "&cMap does not exist.");
+						}
+					} else {
+						Splegg.getSplegg().chat.sendMessage(player, "&cYou do not have permission.");
+					}
 				} else if (args[0].equalsIgnoreCase("addfloor")) {
 					if (perms.canModifyMaps()) {
 						String name = args[1];
@@ -240,6 +252,7 @@ public class SpleggCommand implements CommandExecutor {
 						Splegg.getSplegg().chat.sendMessage(player, "&b--- &4&lSplegg Help &6Admin &b---");
 						sendUsage(player, tag, "create <mapname>", "Create a map");
 						sendUsage(player, tag, "delete <mapname>", "Delete a map");
+						sendUsage(player, tag, "setlobby <map>", "Set lobby for a map (optional)");
 						sendUsage(player, tag, "setspawn <map> next", "Set next spawn in a map");
 						sendUsage(player, tag, "setspawn <map> <id>", "Re-set spawn in a map");
 						sendUsage(player, tag, "addfloor <map>", "Add a floor");

@@ -152,14 +152,18 @@ public class Game {
 						players.put(player.getName(), sp);
 						u.setGame(splegg.games.getGame(name));
 						
-						player.teleport(splegg.config.getLobby());
+						if (map.lobbySet()) {
+							player.teleport(map.getLobby());
+						} else {
+							player.teleport(splegg.config.getLobby());
+						}
 						
 						splegg.chat.sendMessage(player, "You have been teleported to the splegg lobby. You will be teleported to the map on the game start.");
 						
 						splegg.chat.sendMessage(player, "Players in your game: " + getPlayersIn());
 						
 						splegg.chat.sendMessage(player, "You have joined the lobby for map §c" + map.getName() + "§6.");
-
+						
 						ScoreboardUtils.get().setScoreAll(this, "Queue", players.size());
 						
 						if (this.players.size() >= splegg.getConfig().getInt("auto-start.players") && (!this.isStarting())) {
@@ -188,7 +192,11 @@ public class Game {
 							players.put(player.getName(), sp);
 							u.setGame(splegg.games.getGame(name));
 							
-							player.teleport(splegg.config.getLobby());
+							if (map.lobbySet()) {
+								player.teleport(map.getLobby());
+							} else {
+								player.teleport(splegg.config.getLobby());
+							}
 							
 							splegg.chat.sendMessage(player, "You have been teleported to the splegg lobby. You will be teleported to the map on the game start.");
 							
