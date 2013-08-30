@@ -32,23 +32,22 @@ public class GameManager {
 		
 		game.status = Status.INGAME;
 		game.time = 901;
-		game.setLobbyCount(31);
+		game.setLobbyCount(splegg.getConfig().getInt("auto-start.time"));
 		
 		int c = 1;
 		
 		game.loadFloors();
 		
-		splegg.chat.bc("You are playing on &2" + game.getMap().getName() + "&6.", game);
+		splegg.chat.bc("You are playing on &e" + game.getMap().getName() + "&6.", game);
 		
 		Map map = game.getMap();
 		
 		ScoreboardUtils.get().hideScoreAll(game, "Starting in");
+		ScoreboardUtils.get().hideScoreAll(game, "Queue");
 		
 		for (SpleggPlayer sp : game.players.values()) {
 			
 			sp.getPlayer().setLevel(0);
-			
-			sp.getScoreboard().hideScore("Queue");
 			
 			sp.getUtilPlayer().setAlive(true);
 			

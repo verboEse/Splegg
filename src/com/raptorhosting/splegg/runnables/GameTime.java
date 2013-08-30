@@ -20,7 +20,7 @@ public class GameTime implements Runnable {
 		if (game.getCount() > 0) {
 			
 			splegg.games.checkWinner(game);
-			ScoreboardUtils.get().setDisplayAll(game, "Splegg | " + splegg.game.getDigitTime(game.getLobbyCount()));
+			ScoreboardUtils.get().setDisplayAll(game, "Splegg | " + splegg.game.getDigitTime(game.getCount()));
 			
 			if (game.getCount() % 300 == 0) {
 				splegg.game.ingameTimer(game.getCount(), game.getPlayers());

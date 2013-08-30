@@ -21,7 +21,7 @@ public class SignListener implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void signPlace(SignChangeEvent e) {
-	
+		
 		Player player = e.getPlayer();
 		Permissions perms = new Permissions(player);
 		

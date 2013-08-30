@@ -77,7 +77,7 @@ public class LobbySign {
 					
 				}
 				
-				Bukkit.getScheduler().scheduleSyncDelayedTask(splegg, new SignDelay(sign, s), 40L);
+				Bukkit.getScheduler().scheduleSyncDelayedTask(splegg, new SignDelay(sign, s), 30L);
 				
 			} else {
 				Game game = splegg.games.getGame(map.getName());

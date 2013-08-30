@@ -266,7 +266,7 @@ public class SpleggCommand implements CommandExecutor {
 										map.setSpawn(id, player.getLocation());
 										Splegg.getSplegg().chat.sendMessage(player, "You have re-set the spawn " + id + " for map " + name + ".");
 									} else {
-										Splegg.getSplegg().chat.sendMessage(player, "Please set the spawn using &e/" + tag + " <mapname> next &6then try this command again.");
+										Splegg.getSplegg().chat.sendMessage(player, "Please set the spawn using &e/" + tag + " setspawn <mapname> next &6then try this command again.");
 									}
 								}catch(NumberFormatException ex) {
 									Splegg.getSplegg().chat.sendMessage(player, "&cPlease type a number.");

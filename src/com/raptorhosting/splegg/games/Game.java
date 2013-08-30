@@ -39,8 +39,8 @@ public class Game {
 	int small;
 	int counter = 0;
 	int timer = 0;
-	private boolean	starting;
-	private LobbySign sign;
+	boolean	starting;
+	LobbySign sign;
 	
 	public Game(Splegg splegg, Map map) {
 		this.splegg = splegg;
@@ -51,7 +51,7 @@ public class Game {
 		this.floor = new HashSet<Location>();
 		this.data = new ArrayList<Rollback>();
 		time = 601;
-		setLobbyCount(31);
+		lobbycount = 31;
 		y1 = 0;
 		y2 = 0;
 		small = -1;
@@ -66,7 +66,15 @@ public class Game {
 	}
 	
 	public void startGameTimer() {
-		this.timer = Bukkit.getScheduler().scheduleSyncRepeatingTask(splegg, new GameTime(splegg, this), 0L, 20L);
+		final Game game = this;
+		int grace = splegg.getConfig().getInt("graceperiod");
+		splegg.chat.bc("Grace Period (" + grace + "s)", game);
+		new BukkitRunnable() {
+			public void run() {
+				splegg.chat.bc("Grace Period Over!", game);
+				timer = Bukkit.getScheduler().scheduleSyncRepeatingTask(splegg, new GameTime(splegg, game), 0L, 20L);
+			}
+		}.runTaskLater(splegg, 20 * grace);
 	}
 	
 	public void stopGameTimer() {
@@ -189,7 +197,10 @@ public class Game {
 							ScoreboardUtils.get().setScoreAll(this, "Queue", players.size());
 							
 							splegg.chat.sendMessage(player, "You have joined the lobby for map §c" + map.getName() + "§6.");
-							splegg.chat.bcNotForPlayer(player, (splegg.special.contains(player.getName()) ? "§4" : "§a") + player.getName() + "&6 has joined the game. &e" + players.size() + "/" + max, this);
+							
+							if (splegg.getConfig().getBoolean("joinMessages")) {
+								splegg.chat.bcNotForPlayer(player, (splegg.special.contains(player.getName()) ? "§4" : "§a") + player.getName() + "&6 has joined the game. &e" + players.size() + "/" + max, this);
+							}
 							
 							if (this.players.size() >= splegg.getConfig().getInt("auto-start.players") && (!this.isStarting())) {
 								startCountdown();
@@ -221,7 +232,7 @@ public class Game {
 		Bukkit.getScheduler().cancelTask(counter);
 		
 		if (this.status == Status.LOBBY) {
-			this.setLobbyCount(31);
+			lobbycount = splegg.getConfig().getInt("auto-start.time");
 			for (SpleggPlayer sp : players.values()) {
 				sp.getPlayer().setLevel(getLobbyCount());
 				sp.getScoreboard().setScore("Starting in", getLobbyCount());
