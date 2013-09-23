@@ -1,8 +1,5 @@
 package com.raptorhosting.splegg.commands;
 
-import net.h31ix.updater.Updater;
-import net.h31ix.updater.Updater.UpdateType;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -53,15 +50,16 @@ public class SpleggCommand implements CommandExecutor {
 					}
 				} else if (args[0].equalsIgnoreCase("update")) {
 					if (perms.isAdmin()) {
-						if (Splegg.getSplegg().updateOut) {
-							try {
-							Splegg.getSplegg().chat.sendMessage(player, "Commencing update...");
-							@SuppressWarnings("unused")
-							Updater update = new Updater(Splegg.getSplegg(), "splegg-game", Splegg.getSplegg().updateFile, UpdateType.NO_VERSION_CHECK, true);
-							}catch(Exception e) { Splegg.getSplegg().chat.sendMessage(player, "An error occured whilst updating! Please download manually from &bhttp://dev.bukkit.org/bukkit-plugins/splegg-game"); }
-						} else {
-							Splegg.getSplegg().chat.sendMessage(player, "&bNo updates found.");
-						}
+//						if (Splegg.getSplegg().updateOut) {
+//							try {
+//							Splegg.getSplegg().chat.sendMessage(player, "Commencing update...");
+//							@SuppressWarnings("unused")
+//							Updater update = new Updater(Splegg.getSplegg(), "splegg-game", Splegg.getSplegg().updateFile, UpdateType.NO_VERSION_CHECK, true);
+//							}catch(Exception e) { Splegg.getSplegg().chat.sendMessage(player, "An error occured whilst updating! Please download manually from &bhttp://dev.bukkit.org/bukkit-plugins/splegg-game"); }
+//						} else {
+//							Splegg.getSplegg().chat.sendMessage(player, "&bNo updates found.");
+//						}
+						Splegg.getSplegg().chat.sendMessage(player, "&bUpdater has been removed as of v1.6");
 					} else {
 						Splegg.getSplegg().chat.sendMessage(player, "&cYou do not have permission.");
 					}

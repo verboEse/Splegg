@@ -2,8 +2,15 @@ package com.raptorhosting.splegg.games;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
+import org.bukkit.FireworkEffect.Type;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.meta.FireworkMeta;
 
 import com.raptorhosting.splegg.players.SpleggPlayer;
 
@@ -65,7 +72,30 @@ public class GameUtilities {
 				String w = "";
 				for (SpleggPlayer sp : game.players.values()) {
 					w = sp.getPlayer().getName();
+					
+					if (game.splegg.getConfig().getBoolean("fireworks")) {
+						
+						Firework fw = (Firework)sp.getPlayer().getWorld().spawnEntity(sp.getPlayer().getLocation(), EntityType.FIREWORK);
+						FireworkMeta m = fw.getFireworkMeta();
+						
+						FireworkEffect.Type type = Type.BALL;
+						
+						Color c1 = Color.RED;
+						Color c2 = Color.RED;
+						Color c3 = Color.RED;
+						Color c4 = Color.RED;
+						
+						FireworkEffect effect = FireworkEffect.builder().withColor(c1).withColor(c2).withFade(c3).withColor(c4).with(type).trail(true).build();
+						m.addEffect(effect);
+						
+						int rp = new Random().nextInt(2) + 1;
+						m.setPower(rp);
+						
+						fw.setFireworkMeta(m);
+					}
+					
 					game.leaveGame(sp.getUtilPlayer());
+					
 				}
 				
 				game.splegg.chat.bc("&b" + (game.splegg.special.contains(w) ? "§4" : "§a") + w + "&6 has won Splegg on &c" + game.map.getName() + "&6.");

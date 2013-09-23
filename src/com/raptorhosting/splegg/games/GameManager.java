@@ -30,7 +30,7 @@ public class GameManager {
 		
 		Bukkit.getScheduler().cancelTask(game.counter);
 		
-		game.status = Status.INGAME;
+		game.status = Status.GRACE;
 		game.time = 901;
 		game.setLobbyCount(splegg.getConfig().getInt("auto-start.time"));
 		
@@ -62,8 +62,12 @@ public class GameManager {
 			sp.getPlayer().setGameMode(GameMode.ADVENTURE);
 			
 			// give items
-			for (int i = 0; i < 9; i++) {
-				sp.getPlayer().getInventory().setItem(i, getGun());
+			if (splegg.getConfig().getBoolean("allOfHotBar")) {
+				for (int i = 0; i < 9; i++) {
+					sp.getPlayer().getInventory().setItem(i, getGun());
+				}
+			} else {
+				sp.getPlayer().getInventory().addItem(getGun());
 			}
 			
 		}

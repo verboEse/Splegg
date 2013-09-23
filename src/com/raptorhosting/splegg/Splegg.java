@@ -1,12 +1,7 @@
 package com.raptorhosting.splegg;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-
-import net.h31ix.updater.Updater;
-import net.h31ix.updater.Updater.UpdateResult;
-import net.h31ix.updater.Updater.UpdateType;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,7 +20,6 @@ import com.raptorhosting.splegg.games.Status;
 import com.raptorhosting.splegg.maps.MapUtilities;
 import com.raptorhosting.splegg.misc.Chat;
 import com.raptorhosting.splegg.misc.Config;
-import com.raptorhosting.splegg.misc.UpdateUtils;
 import com.raptorhosting.splegg.misc.Utilities;
 import com.raptorhosting.splegg.players.PlayerManager;
 import com.raptorhosting.splegg.players.UtilPlayer;
@@ -45,12 +39,7 @@ public class Splegg extends JavaPlugin {
 	public Utilities utils;
 	public Config config;
 	
-	public Updater u;
-	public boolean updateOut = false;
-	public String newVer = "";
-	public File updateFile = this.getFile();
-	
-	public List<String> special = Arrays.asList(new String[] { "njb_said", "That1Guy2", "ChippNDipp", "TheSenorChang", "Dwizofoz" , "irRedemption"});
+	public List<String> special = Arrays.asList(new String[] { "njb_said", "That1Guy2", "ChippNDipp", "CosmicLuck", "MCNation101", "TheSenorChang", "Dwizofoz" , "irRedemption"});
 	public boolean eco = false;
 	public boolean disabling = false;
 	
@@ -74,17 +63,6 @@ public class Splegg extends JavaPlugin {
 		
 		getConfig().options().copyDefaults(true);
 		saveConfig();
-		
-		if (getConfig().getBoolean("auto-update")) {
-			u = new Updater(this, "splegg-game", getFile(), UpdateType.NO_DOWNLOAD, false);
-			updateOut = u.getResult() == UpdateResult.UPDATE_AVAILABLE;
-			if (updateOut) {
-				newVer = u.getLatestVersionString();
-			}
-			getServer().getPluginManager().registerEvents(new UpdateUtils(), this);
-		}
-		
-//		economy.init(this);
 		
 		getServer().getPluginManager().registerEvents(new MapListener(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerListener(), this);

@@ -2,5 +2,6 @@ auto-start:
   players: 5
   time: 30
 graceperiod: 5
-auto-update: true
+fireworks: true
+allOfHotbar: false
 joinMessages: true

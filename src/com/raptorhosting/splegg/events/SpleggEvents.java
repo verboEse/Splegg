@@ -37,8 +37,10 @@ public class SpleggEvents implements Listener {
 				
 				if (u.getGame() != null && u.isAlive()) {
 					
-					player.launchProjectile(Egg.class);
-					player.playSound(player.getLocation(), Sound.WITHER_SHOOT, 0.1F, 1F);
+					if (u.getGame().getStatus() == Status.INGAME) {
+						player.launchProjectile(Egg.class);
+						player.playSound(player.getLocation(), Sound.WITHER_SHOOT, 0.1F, 1F);
+					}
 					
 				}
 				

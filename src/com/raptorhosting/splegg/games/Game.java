@@ -67,10 +67,12 @@ public class Game {
 	
 	public void startGameTimer() {
 		final Game game = this;
+		
 		int grace = splegg.getConfig().getInt("graceperiod");
 		splegg.chat.bc("Grace Period (" + grace + "s)", game);
 		new BukkitRunnable() {
 			public void run() {
+				status = Status.INGAME;
 				splegg.chat.bc("Grace Period Over!", game);
 				timer = Bukkit.getScheduler().scheduleSyncRepeatingTask(splegg, new GameTime(splegg, game), 0L, 20L);
 			}
