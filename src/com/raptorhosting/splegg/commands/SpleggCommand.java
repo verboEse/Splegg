@@ -25,7 +25,7 @@ public class SpleggCommand implements CommandExecutor {
 			Permissions perms = new Permissions(player);
 			
 			if (args.length == 0) {
-				Splegg.getSplegg().chat.sendMessage(player, "&b--- &dSplegg v1.4 &b---");
+				Splegg.getSplegg().chat.sendMessage(player, "&b--- &dSplegg v1.6 &b---");
 				Splegg.getSplegg().chat.sendMessage(player, "&c/" + tag + " help <player|mod|admin>");
 			} else if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("join")) {
