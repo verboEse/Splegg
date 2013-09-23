@@ -127,6 +127,7 @@ public class Game {
 		return this.map;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void joinGame(UtilPlayer u) {
 		Player player = u.getPlayer();
 		if (u.getGame() != null) {

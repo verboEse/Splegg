@@ -6,7 +6,6 @@ import java.util.Random;
 
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
-import org.bukkit.FireworkEffect.Type;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -75,23 +74,31 @@ public class GameUtilities {
 					
 					if (game.splegg.getConfig().getBoolean("fireworks")) {
 						
-						Firework fw = (Firework)sp.getPlayer().getWorld().spawnEntity(sp.getPlayer().getLocation(), EntityType.FIREWORK);
-						FireworkMeta m = fw.getFireworkMeta();
-						
-						FireworkEffect.Type type = Type.BALL;
-						
-						Color c1 = Color.RED;
-						Color c2 = Color.RED;
-						Color c3 = Color.RED;
-						Color c4 = Color.RED;
-						
-						FireworkEffect effect = FireworkEffect.builder().withColor(c1).withColor(c2).withFade(c3).withColor(c4).with(type).trail(true).build();
-						m.addEffect(effect);
-						
-						int rp = new Random().nextInt(2) + 1;
-						m.setPower(rp);
-						
-						fw.setFireworkMeta(m);
+						for (int i = 0; i < 8; i++) {
+							Firework fw = (Firework)sp.getPlayer().getWorld().spawnEntity(sp.getPlayer().getLocation(), EntityType.FIREWORK);
+						    FireworkMeta fwm = fw.getFireworkMeta();
+						    Random r = new Random();
+
+						    int rt = r.nextInt(4) + 1;
+						    FireworkEffect.Type type = FireworkEffect.Type.BALL;
+						    if (rt == 1) type = FireworkEffect.Type.BALL;
+						    if (rt == 2) type = FireworkEffect.Type.BALL_LARGE;
+						    if (rt == 3) type = FireworkEffect.Type.BURST;
+						    if (rt == 4) type = FireworkEffect.Type.CREEPER;
+						    if (rt == 5) type = FireworkEffect.Type.STAR;
+
+						    Color c1 = Color.RED;
+						    Color c2 = Color.FUCHSIA;
+						    Color c3 = Color.ORANGE;
+						    Color c4 = Color.TEAL;
+
+						    FireworkEffect effect = FireworkEffect.builder().flicker(r.nextBoolean()).withColor(c1).withColor(c2).withFade(c3).withColor(c4).with(type).trail(false).build();
+						    fwm.addEffect(effect);
+
+						    fwm.setPower(1);
+
+						    fw.setFireworkMeta(fwm);
+						}
 					}
 					
 					game.leaveGame(sp.getUtilPlayer());
