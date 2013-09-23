@@ -185,6 +185,7 @@ public class Game {
 							u.getStore().save();
 							splegg.utils.clearInventory(player);
 							
+							player.updateInventory();
 							player.setHealth(20);
 							player.setFoodLevel(20);
 							player.setLevel(0);
