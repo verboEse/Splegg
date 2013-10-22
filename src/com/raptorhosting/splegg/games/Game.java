@@ -1,5 +1,6 @@
 package com.raptorhosting.splegg.games;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,6 +11,9 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.User;
 
 import com.raptorhosting.splegg.Splegg;
 import com.raptorhosting.splegg.lobby.LobbySign;
@@ -152,6 +156,15 @@ public class Game {
 						player.setExp(0.0F);
 						player.setGameMode(GameMode.ADVENTURE);
 						
+						if ( splegg.getConfig().getBoolean("economy.use") ) {
+							splegg.chat.bc("Piep 1.");
+							Essentials ess = Splegg.getSplegg().getEssentials();
+							User wp = ess.getUser(u);
+							double c = splegg.getConfig().getDouble("economy.input");
+							BigDecimal amount = new BigDecimal (c);
+							wp.takeMoney(amount);
+						}
+						
 						players.put(player.getName(), sp);
 						u.setGame(splegg.games.getGame(name));
 						
@@ -192,6 +205,21 @@ public class Game {
 							player.setLevel(0);
 							player.setExp(0.0F);
 							player.setGameMode(GameMode.ADVENTURE);
+							
+							if ( splegg.getConfig().getBoolean("economy.use") ) {
+								Player sp1 = sp.getPlayer();
+								Essentials ess = Splegg.getSplegg().getEssentials();
+								User wp = ess.getUser(sp1);
+								double c = splegg.getConfig().getDouble("economy.input");
+								BigDecimal amount = new BigDecimal (c);
+								if ( wp.canAfford(amount) ) {
+									splegg.chat.bc("Piep 5a.");
+									wp.takeMoney(amount);
+								} else {
+									splegg.chat.bc("Piep 5b.");
+									splegg.chat.sendMessage(player, "Not enough money. Needed: " + amount + "$");
+								}
+							}
 							
 							players.put(player.getName(), sp);
 							u.setGame(splegg.games.getGame(name));

@@ -5,3 +5,7 @@ graceperiod: 5
 fireworks: true
 allOfHotbar: false
 joinMessages: true
+economy:
+  use: true
+  win: 10
+  input: 2

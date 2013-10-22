@@ -1,9 +1,9 @@
 name: Splegg
-version: 1.6
+version: 1.6.1
 main: com.raptorhosting.splegg.Splegg
-authors: [njb_said, Raptor-Hosting]
+authors: [njb_said, Raptor-Hosting, verboEse]
 description: Splegg > Spleef using eggs
-softdepend: [WorldEdit]
+softdepend: [WorldEdit, Essentials]
 commands:
   splegg:
     description:

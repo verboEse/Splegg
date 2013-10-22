@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="C:/dev/bukkit.jar"/>
 	<classpathentry kind="lib" path="C:/dev/craftbukkit.jar"/>
 	<classpathentry kind="lib" path="C:/dev/WorldEdit.jar"/>
+	<classpathentry kind="lib" path="C:/dev/Essentials.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

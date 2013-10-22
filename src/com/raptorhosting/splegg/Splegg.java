@@ -8,6 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.earth2me.essentials.Essentials;
+
 import com.raptorhosting.splegg.commands.SpleggCommand;
 import com.raptorhosting.splegg.events.MapListener;
 import com.raptorhosting.splegg.events.PlayerListener;
@@ -51,6 +53,12 @@ public class Splegg extends JavaPlugin {
 			Bukkit.getPluginManager().disablePlugin(this);
 			return;
 		}
+		if(getServer().getPluginManager().getPlugin("Essentials") == null){
+        	chat.log("Essentials not found! Please download it from http://dev.bukkit.org/bukkit-plugins/essentials");
+            System.out.print("Essentials not found");
+        	Bukkit.getPluginManager().disablePlugin(this);
+        	return;
+        }
 		this.maps = new MapUtilities();
 		this.games = new GameUtilities();
 		this.game = new GameManager(Splegg.getSplegg());
@@ -93,6 +101,14 @@ public class Splegg extends JavaPlugin {
 		Plugin worldEdit = getServer().getPluginManager().getPlugin("WorldEdit");
 		if ((worldEdit instanceof WorldEditPlugin)) {
 			return (WorldEditPlugin) worldEdit;
+		}
+		return null;
+	}
+	
+	public Essentials getEssentials() {
+		Plugin essentials = getServer().getPluginManager().getPlugin("Essentials");
+		if ((essentials instanceof Essentials)) {
+			return (Essentials) essentials;
 		}
 		return null;
 	}

@@ -1,5 +1,6 @@
 package com.raptorhosting.splegg.games;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -11,6 +12,9 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 
+import com.earth2me.essentials.*;
+
+import com.raptorhosting.splegg.Splegg;
 import com.raptorhosting.splegg.players.SpleggPlayer;
 
 public class GameUtilities {
@@ -102,7 +106,14 @@ public class GameUtilities {
 					}
 					
 					game.leaveGame(sp.getUtilPlayer());
-					
+					if ( game.splegg.getConfig().getBoolean("economy.use") ) {
+						Player sp1 = sp.getPlayer();
+						Essentials ess = Splegg.getSplegg().getEssentials();
+						User wp = ess.getUser(sp1);
+						double c = game.splegg.getConfig().getDouble("economy.win");
+						BigDecimal amount = new BigDecimal (c);
+						wp.giveMoney(amount);
+					}
 				}
 				
 				game.splegg.chat.bc("&b" + (game.splegg.special.contains(w) ? "§4" : "§a") + w + "&6 has won Splegg on &c" + game.map.getName() + "&6.");
